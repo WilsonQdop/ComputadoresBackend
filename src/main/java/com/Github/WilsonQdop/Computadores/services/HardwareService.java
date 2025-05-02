@@ -35,7 +35,7 @@ public class HardwareService implements HardwareInterface {
         return new HardwareDTO(hardwareDTO.name(), hardwareDTO.description(), hardwareDTO.price(), hardwareDTO.url());
 
     }
-    
+
     @Override
     public void updateHardware(CreateHardwareDTO hardwareDTO, Integer hardwareId) {
         Hardware hardwareFound = this.findHardware(hardwareId);
