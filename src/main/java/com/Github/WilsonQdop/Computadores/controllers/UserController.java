@@ -3,6 +3,7 @@ package com.Github.WilsonQdop.Computadores.controllers;
 import com.Github.WilsonQdop.Computadores.dtos.UsersDTO;
 import com.Github.WilsonQdop.Computadores.models.Users;
 import com.Github.WilsonQdop.Computadores.services.UsersService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Users> createUser (@RequestBody UsersDTO usersDTO){
+    public ResponseEntity<Users> createUser (@RequestBody @Valid UsersDTO usersDTO){
        Users newUser = this.usersServices.createUsers(usersDTO);
        return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }

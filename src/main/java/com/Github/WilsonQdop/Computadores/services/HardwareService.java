@@ -2,6 +2,7 @@ package com.Github.WilsonQdop.Computadores.services;
 
 import com.Github.WilsonQdop.Computadores.dtos.CreateHardwareDTO;
 import com.Github.WilsonQdop.Computadores.dtos.HardwareDTO;
+import com.Github.WilsonQdop.Computadores.exceptions.HardwareNotFoundException;
 import com.Github.WilsonQdop.Computadores.interfaces.HardwareInterface;
 import com.Github.WilsonQdop.Computadores.models.Hardware;
 import com.Github.WilsonQdop.Computadores.models.Setup;
@@ -58,6 +59,6 @@ public class HardwareService implements HardwareInterface {
     @Override
     public Hardware findHardware(Integer hardwareId) {
         return this.hardwareRepository.findById(hardwareId).orElseThrow(() ->
-                new RuntimeException("Hardware com o id: " + hardwareId + " não encontrado!"));
+                new HardwareNotFoundException("Hardware com o id: " + hardwareId + " não encontrado!"));
     }
 }

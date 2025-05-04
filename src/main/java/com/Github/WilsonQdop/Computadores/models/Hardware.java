@@ -11,6 +11,7 @@ public class Hardware {
     private String name;
     private Double price;
     private String description;
+    @Column(length = 1000)
     private String url;
 
     @ManyToOne @JsonBackReference

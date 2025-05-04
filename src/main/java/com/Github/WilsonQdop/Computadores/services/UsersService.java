@@ -1,6 +1,7 @@
 package com.Github.WilsonQdop.Computadores.services;
 
 import com.Github.WilsonQdop.Computadores.dtos.UsersDTO;
+import com.Github.WilsonQdop.Computadores.exceptions.UserNotFoundException;
 import com.Github.WilsonQdop.Computadores.interfaces.UsersInterface;
 import com.Github.WilsonQdop.Computadores.models.Users;
 import com.Github.WilsonQdop.Computadores.repositories.UsersRepository;
@@ -22,8 +23,9 @@ public class UsersService implements UsersInterface {
 
     @Override
     public Users findById(Integer id) {
-             return usersRepository.findById(id)
-                    .orElseThrow(() -> new RuntimeException("Usuário com id: " + id + " não encontrado"));
+
+        return usersRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("Usuário com ID " + id + " não encontrado"));
 
     }
 

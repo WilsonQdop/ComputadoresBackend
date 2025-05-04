@@ -3,18 +3,22 @@ package com.Github.WilsonQdop.Computadores.services;
 import com.Github.WilsonQdop.Computadores.dtos.CreateSetupDTO;
 import com.Github.WilsonQdop.Computadores.dtos.HardwareDTO;
 import com.Github.WilsonQdop.Computadores.dtos.SetupDTO;
+import com.Github.WilsonQdop.Computadores.dtos.UpdateNameSetup;
+import com.Github.WilsonQdop.Computadores.exceptions.SetupNotFoundException;
 import com.Github.WilsonQdop.Computadores.interfaces.SetupInterface;
 import com.Github.WilsonQdop.Computadores.models.Hardware;
 import com.Github.WilsonQdop.Computadores.models.Setup;
 import com.Github.WilsonQdop.Computadores.models.Users;
 import com.Github.WilsonQdop.Computadores.repositories.SetupRepository;
 
+import org.hibernate.validator.spi.nodenameprovider.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 
@@ -65,7 +69,7 @@ public class SetupService implements SetupInterface {
     @Override
     public Setup findSetup(Integer setupId) {
         return this.setupRepository.findById(setupId).orElseThrow(() ->
-                new RuntimeException("Setup não encontrado"));
+                new SetupNotFoundException("Setup com ID " + setupId + " não encontrado"));
 
     }
 
@@ -74,5 +78,13 @@ public class SetupService implements SetupInterface {
         Setup findSetup = this.findSetup(setupId);
 
         this.setupRepository.delete(findSetup);
+    }
+
+    public void updateSetup (Integer id, UpdateNameSetup newName) {
+        Setup name = this.findSetup(id);
+
+        name.setName(newName.name());
+
+        this.setupRepository.save(name);
     }
 }
